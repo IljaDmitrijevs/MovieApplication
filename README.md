@@ -34,8 +34,8 @@ MovieApplication/
   "DBConnection": "Server=(localdb)\\mssqllocaldb;Database=MovieFinderDb;Trusted_Connection=True;"
 }
  ```
-▶️ Run the Application
-dotnet restore
-dotnet ef database update --project MovieApplicationApi
-dotnet run --project MovieApplicationApi
-dotnet run --project Client
+▶️ Run the Application:
+1. dotnet restore
+2. dotnet ef database update --project MovieApplicationApi
+3. dotnet run --project MovieApplicationApi
+4. dotnet run --project Client
