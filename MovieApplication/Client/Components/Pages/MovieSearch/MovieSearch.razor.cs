@@ -64,11 +64,15 @@ namespace Client.Components.Pages.MovieSearch
 
             try
             {
-                if (!string.IsNullOrEmpty(title))
+                if (!string.IsNullOrEmpty(title)) 
+                {
                     searchTitle = title;
+                }
 
-                if (string.IsNullOrWhiteSpace(searchTitle))
+                if (string.IsNullOrWhiteSpace(searchTitle)) 
+                {
                     return;
+                }
 
                 var response = await Http.GetFromJsonAsync<MovieSearchResponse>($"api/movie/search?title={searchTitle}");
                 searchResults = response?.Search ?? new List<Movie>();
@@ -79,6 +83,7 @@ namespace Client.Components.Pages.MovieSearch
             catch (Exception ex)
             {
                 Console.WriteLine($"Error searching movies: {ex.Message}");
+
                 throw;
             }
             finally
@@ -94,8 +99,11 @@ namespace Client.Components.Pages.MovieSearch
         protected async Task LoadDetails(string imdbId)
         {
             var response = await Http.GetFromJsonAsync<MovieDetails>($"api/movie/details?imdbId={imdbId}");
-            if (response != null)
+
+            if (response != null) 
+            {
                 selectedMovie = response;
+            }              
         }
     }
 }

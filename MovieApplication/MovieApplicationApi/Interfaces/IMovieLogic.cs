@@ -1,7 +1,7 @@
-﻿namespace MovieApplicationApi.Interfaces
-{
-    using MovieApplicationApi.Models;
+﻿using MovieApplicationApi.Models;
 
+namespace MovieApplicationApi.Interfaces
+{
     /// <summary>
     /// Movie logic interface.
     /// </summary>

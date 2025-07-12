@@ -1,14 +1,27 @@
 using Client.Components;
+using Client.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.Configure<ApiSettings>(
+    builder.Configuration.GetSection("ApiSettings"));
+
+var apiSettings = builder.Configuration.GetRequiredSection("ApiSettings").Get<ApiSettings>();
+
+if (string.IsNullOrWhiteSpace(apiSettings?.BaseUrl))
+{
+    throw new InvalidOperationException("API base URL is not configured. Check ApiSettings:BaseUrl in appsettings.json.");
+}
+
 builder.Services.AddHttpClient("MovieApplicationApi", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7136/"); // adjust port if needed
+    client.BaseAddress = new Uri(apiSettings.BaseUrl);
 });
+
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("MovieApplicationApi"));
 var app = builder.Build();
 
