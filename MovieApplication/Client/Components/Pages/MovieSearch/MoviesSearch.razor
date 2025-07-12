@@ -1,0 +1,92 @@
+﻿@page "/"
+@using MovieApplicationApi.Models
+<link href="MovieSearch.css" rel="stylesheet" />
+@inherits MovieSearchBase
+
+<div class="@($"theme-container {ThemeClass}")">
+    <div class="theme-toggle">
+        <button class="icon-btn" @onclick="ToggleDarkMode" title="Toggle dark mode">
+
+            @if (isDarkMode)
+            {
+                <span class="icon">🌞</span>
+            }
+            else
+            {
+                <span class="icon">🌙</span>
+            }
+
+        </button>
+    </div>
+    <div class="movie-search-container">
+        <h2>🎬 Movie Finder</h2>
+
+        <div class="search-bar">
+            <input @bind="searchTitle"
+                   @bind:event="oninput"
+                   @onkeydown="HandleSearchEnter"
+                   maxlength="100"
+                   placeholder="Enter movie title..." />
+
+            <button @onclick="() => Search()" disabled="@isSearching">
+                🔍 Search
+            </button>
+        </div>
+
+        @if (searchTitle?.Length >= 100)
+        {
+            <p class="max-char-lmit"> Max characters is 100</p>
+        }
+
+        @if (recentSearches?.Any() == true)
+        {
+            <div class="recent-searches">
+                <p><strong>Recent Searches:</strong></p>
+                <ul>
+                    @foreach (var query in recentSearches)
+                    {
+                        <li @onclick="() => Search(query)">@query</li>
+                    }
+                </ul>
+            </div>
+        }
+
+        @if (searchResults?.Any() == true)
+        {
+            <div class="results">
+                <h4>Results:</h4>
+                <ul>
+                    @foreach (var movie in searchResults)
+                    {
+                        <li @onclick="() => LoadDetails(movie.imdbID)">
+                            @movie.Title (@movie.Year)
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+
+        @if (searchResults?.Count == 0)
+        {
+            <p class="no-results"> No movies found for "@searchTitle"</p>
+        }
+
+        @if (selectedMovie != null)
+        {
+            <div class="movie-details">
+                <img src="@selectedMovie.Poster" alt="Movie Poster" />
+                <div class="movie-info">
+                    <h3>@selectedMovie.Title (@selectedMovie.Year)</h3>
+                    <p><strong>Genre:</strong> @selectedMovie.Genre</p>
+                    <p><strong>Director:</strong> @selectedMovie.Director</p>
+                    <p><strong>Writer:</strong> @selectedMovie.Writer</p>
+                    <p><strong>Actors:</strong> @selectedMovie.Actors</p>
+                    <p><strong>Country:</strong> @selectedMovie.Country</p>
+                    <p><strong>Plot:</strong> @selectedMovie.Plot</p>
+                    <p class="rating">⭐ IMDB: @selectedMovie.imdbRating</p>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
