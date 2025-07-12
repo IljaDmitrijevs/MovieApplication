@@ -39,7 +39,3 @@ dotnet restore
 dotnet ef database update --project MovieApplicationApi
 dotnet run --project MovieApplicationApi
 dotnet run --project Client
-
-Client: https://localhost:7239
-
-API: https://localhost:7136
