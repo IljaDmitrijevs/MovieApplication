@@ -45,7 +45,7 @@ To update the API address, edit `appsettings.Development.json` in the Blazor pro
 ```json
 {
   "ApiSettings": {
-    "BaseUrl": "https://localhost:7136" - Update it your local api adress you can check it launchSettings.json in API project https: "applicationUrl" or just start API project and copt from browser.
+    "BaseUrl": "https://localhost:7136" - Update it. Your local api adress you can check it launchSettings.json in API project https: "applicationUrl" or just start API project and copt from browser.
   }
 }
 ```
