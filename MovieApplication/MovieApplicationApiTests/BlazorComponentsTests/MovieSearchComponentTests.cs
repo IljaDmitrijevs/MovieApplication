@@ -16,7 +16,7 @@ namespace MovieApplicationTests.BlazorComponentsTests
     {
         private readonly MockHttpMessageHandler _mockHttp;
 
-        private readonly string BaseUri = "https://localhost:7136/";
+        private readonly string BaseUri = "https://localhost/";
 
         public MovieSearchComponentTests()
         {
